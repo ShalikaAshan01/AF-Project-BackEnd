@@ -1,21 +1,21 @@
 {
-  "name": "expressjs",
-  "version": "0.0.0",
-  "private": true,
+  "name": "af_project_backend_node",
+  "version": "1.0.0",
+  "description": "AF Group project node backend",
+  "main": "app.js",
+  "dependencies": {},
+  "devDependencies": {},
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {
-    "bcrypt": "^3.0.6",
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "express": "~4.16.1",
-    "http-errors": "~1.6.3",
-    "mongoose": "^5.5.11",
-    "morgan": "~1.9.1",
-    "pug": "2.0.0-beta11"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShalikaAshan01/AF-Project-BackEnd.git"
   },
-  "devDependencies": {
-    "nodemon": "^1.19.1"
-  }
+  "author": "WE-01",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ShalikaAshan01/AF-Project-BackEnd/issues"
+  },
+  "homepage": "https://github.com/ShalikaAshan01/AF-Project-BackEnd#readme"
 }

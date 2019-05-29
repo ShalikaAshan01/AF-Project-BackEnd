@@ -44,5 +44,7 @@ const userSchema = new Schema({
         type: Date
     }
 });
-var user = mongoose.model("user", userSchema);
-module.exports = user;
+var User = module.exports = mongoose.model('user', userSchema);
+module.exports.get = function (callback, limit) {
+    User.find(callback).limit(limit);
+}
