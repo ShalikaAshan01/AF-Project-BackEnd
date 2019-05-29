@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "AF Group project node backend",
   "main": "app.js",
-  "dependencies": {},
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "mongoose": "^5.5.11"
+  },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

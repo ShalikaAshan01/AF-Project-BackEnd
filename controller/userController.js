@@ -1,8 +1,8 @@
-const user = require('../Models/userModel');
+const user = require('../model/userModel');
 const bcrypt = require('bcrypt');
-const userService = function () {};
+const userController = function () {};
 
-userService.signin = function (data) {
+userController.signin = function (data) {
     return new Promise(function (resolve, reject) {
 
         user.findOne({email: data.email})
@@ -40,4 +40,4 @@ userService.signin = function (data) {
             });
     });
 };
-module.exports = userService;
+module.exports = userController;

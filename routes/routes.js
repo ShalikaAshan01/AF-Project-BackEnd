@@ -10,7 +10,7 @@ router.get('/', function (req, res) {
 });
 
 // Import controllers
-var userController = require('./controller/userController');
+var userController = require('../controller/userController');
 
 
 
