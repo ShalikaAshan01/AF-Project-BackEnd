@@ -1,27 +1,21 @@
 {
-  "name": "af_project_backend_node",
+  "name": "af-backend-node",
   "version": "1.0.0",
-  "description": "AF Group project node backend",
+  "description": "",
   "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "author": "pasanjg",
+  "license": "ISC",
   "dependencies": {
     "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.5.11",
+    "morgan": "^1.9.1",
     "nodemon": "^1.19.1"
-  },
-  "devDependencies": {},
-  "scripts": {
-	"start": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ShalikaAshan01/AF-Project-BackEnd.git"
-  },
-  "author": "WE-01",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ShalikaAshan01/AF-Project-BackEnd/issues"
-  },
-  "homepage": "https://github.com/ShalikaAshan01/AF-Project-BackEnd#readme"
+  }
 }
