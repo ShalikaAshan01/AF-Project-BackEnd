@@ -12,6 +12,7 @@ mongoose.connect('mongodb+srv://Lms:lms@af-lms-ikin0.mongodb.net/AF-LMS?retryWri
  * Route files are imported here
  */
 const UserRoutes = require('./routes/users');
+const CourseRoutes = require('./routes/courses');
 
 app.use(morgan('dev'));
 
@@ -37,7 +38,7 @@ app.use((req, res, next) => {
  * Define all routes here
  */
 app.use('/user', UserRoutes);
-
+app.use('/lms/course', CourseRoutes);
 /**
  * Sever configuration
  */
