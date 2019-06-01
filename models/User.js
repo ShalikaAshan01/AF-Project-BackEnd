@@ -16,8 +16,8 @@ const userSchema = mongoose.Schema({
     gender: { type: String, required: true },
     faculty: { type: String, required: true },
     status: { type: String, required: true, default: 'ACTIVE' },
-    //confirmed: { type: Number, required: true, default: 0 },
-    //confirm_code: { type: String, required: true, default: '1234' },
+    confirmed: { type: Number, required: true, default: 0 },
+    confirm_code: { type: String, required: true, default: '12345678' },
     created_by: { type: mongoose.Schema.Types.ObjectId, required: true },
     created_at: { type: Date, required: true, default: Date.now() },
     updated_at: { type: Date, required: true, default: Date.now() }

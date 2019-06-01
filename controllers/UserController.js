@@ -7,6 +7,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const nodeMailer = require('nodemailer');
 
 const User = require('../models/User');
 
@@ -122,3 +123,87 @@ exports.login = (req, res, next) => {
             })
         });
 };
+
+exports.sendVerifyMail = (req, res) => {
+    const id = req.params.userId;
+    User.find({ _id: id })
+        .exec()
+        .then(user => {
+            if (user.length < 1) {
+                return res.status(401).json({
+                    message: 'Auth failed'
+                });
+            }
+            const email = user[0].email;
+            const code = makeCode(8);
+
+            User.updateOne({ _id: id }, {confirm_code: code, confirmed: 0})
+            .exec()
+            .then(result => {
+                sendEmail(email, code);
+                res.status(200).json({
+                    message: 'Verification code sent to ' + email
+                });
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json({
+                    error: err
+                })
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            })
+        });
+};
+
+
+// send email with verification code
+function sendEmail(email, code) {
+
+    // from details
+    const from = 'trainticketsapp@gmail.com';
+    const pass = 'trainTicketsApp';
+
+    // mail settings
+    let transporter = nodeMailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
+        auth: {
+            user: from,
+            pass: pass
+        }
+    });
+
+    // mail template to be sent
+    let mailOptions = {
+        from: '"TrainTickets" <trainticketsapp@gmail.com>',
+        to: email,
+        subject: "Please verify your Email address.",
+        text: "Enter the code\n" + code
+    };
+
+    // sending mail
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            return console.log(error);
+        }
+        console.log('Message %s sent: %s', info.messageId, info.response);
+    });
+
+};
+
+
+function makeCode(length) {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
