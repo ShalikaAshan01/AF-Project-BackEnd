@@ -62,7 +62,7 @@ exports.register = (req, res, next) => {
                                     },
                                     reqeuest: {
                                         type: 'GET',
-                                        url: 'http://localhost:3000/user/' + result.id
+                                        url: 'http://localhost:4200/user/' + result.id
                                     }
                                 });
                             })

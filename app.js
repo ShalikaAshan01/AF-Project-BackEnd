@@ -41,11 +41,11 @@ app.use('/user', UserRoutes);
 /**
  * Sever configuration
  */
-app.listen(3000, err => {
+app.listen(4200, err => {
     if (err) {
         console.log('ERROR establishing server connection!');
         return;
     }
 
-    console.log('Server running on http://localhost:3000');
+    console.log('Server running on http://localhost:4200');
 });
