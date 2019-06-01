@@ -85,16 +85,24 @@ exports.login = (req, res, next) => {
         .then(user => {
             if (user.length < 1) {
                 return res.status(401).json({
-                    message: 'Auth failed'
+                    message: 'Auth failed',
+                    success: false
                 });
             }
             bcrypt.compare(req.body.password, user[0].password, (err, result) => {
                 if (err) {
                     return res.status(401).json({
-                        message: 'Auth failed'
+                        message: 'Auth failed',
+                        success: false
                     });
                 }
                 if (result) {
+                    if (user[0].confirmed == 0) {
+                        return res.status(401).json({
+                            message: 'Please verify your email',
+                            success: false
+                        });
+                    }
                     const token = jwt.sign(
                         {
                             username: user[0].username,
@@ -109,11 +117,13 @@ exports.login = (req, res, next) => {
                     return res.status(200).json({
                         message: 'Auth successful.',
                         user: user[0],
-                        token: token
+                        token: token,
+                        success: true
                     });
                 }
                 res.status(401).json({
-                    message: 'Auth failed'
+                    message: 'Auth failed',
+                    success: false
                 });
             });
         })
@@ -191,7 +201,7 @@ exports.verifyCode = (req, res) => {
                             error: err
                         })
                     });
-            }else{
+            } else {
                 res.status(401).json({
                     message: 'Verification failed',
                     success: false
