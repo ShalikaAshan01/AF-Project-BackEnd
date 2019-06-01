@@ -108,6 +108,7 @@ exports.login = (req, res, next) => {
                     );
                     return res.status(200).json({
                         message: 'Auth successful.',
+                        user: user[0],
                         token: token
                     });
                 }
@@ -137,20 +138,65 @@ exports.sendVerifyMail = (req, res) => {
             const email = user[0].email;
             const code = makeCode(8);
 
-            User.updateOne({ _id: id }, {confirm_code: code, confirmed: 0})
-            .exec()
-            .then(result => {
-                sendEmail(email, code);
-                res.status(200).json({
-                    message: 'Verification code sent to ' + email
-                });
-            })
-            .catch(err => {
-                console.log(err);
-                res.status(500).json({
-                    error: err
+            User.updateOne({ _id: id }, { confirm_code: code, confirmed: 0 })
+                .exec()
+                .then(result => {
+                    sendEmail(email, code);
+                    res.status(200).json({
+                        message: 'Verification code sent to ' + email,
+                        success: true
+                    });
                 })
-            });
+                .catch(err => {
+                    console.log(err);
+                    res.status(500).json({
+                        error: err
+                    })
+                });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err,
+                success: false
+            })
+        });
+};
+
+
+exports.verifyCode = (req, res) => {
+    const confirm_code = req.body.confirm_code;
+    const id = req.params.userId;
+    User.find({ _id: id })
+        .exec()
+        .then(user => {
+            if (user.length < 1) {
+                return res.status(401).json({
+                    message: 'Auth failed'
+                });
+            }
+            const code = user[0].confirm_code;
+            if (confirm_code === code) {
+                User.updateOne({ _id: id }, { confirm_code: '', confirmed: 1 })
+                    .exec()
+                    .then(result => {
+                        res.status(200).json({
+                            message: 'Email verified. Please login.',
+                            success: true
+                        });
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        res.status(500).json({
+                            error: err
+                        })
+                    });
+            }else{
+                res.status(401).json({
+                    message: 'Verification failed',
+                    success: false
+                });
+            }
         })
         .catch(err => {
             console.log(err);
@@ -165,8 +211,8 @@ exports.sendVerifyMail = (req, res) => {
 function sendEmail(email, code) {
 
     // from details
-    const from = 'trainticketsapp@gmail.com';
-    const pass = 'trainTicketsApp';
+    const from = '<email>'; // change this
+    const pass = '<password>'; // change this
 
     // mail settings
     let transporter = nodeMailer.createTransport({
@@ -181,7 +227,7 @@ function sendEmail(email, code) {
 
     // mail template to be sent
     let mailOptions = {
-        from: '"TrainTickets" <trainticketsapp@gmail.com>',
+        from: '"LMS" <email>', // change this
         to: email,
         subject: "Please verify your Email address.",
         text: "Enter the code\n" + code
