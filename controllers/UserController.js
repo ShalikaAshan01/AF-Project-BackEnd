@@ -211,8 +211,8 @@ exports.verifyCode = (req, res) => {
 function sendEmail(email, code) {
 
     // from details
-    const from = '<email>'; // change this
-    const pass = '<password>'; // change this
+    const from = 'adm1n157a70r@gmail.com';
+    const pass = '5hNuMvydHb3WpjD';
 
     // mail settings
     let transporter = nodeMailer.createTransport({
@@ -227,7 +227,7 @@ function sendEmail(email, code) {
 
     // mail template to be sent
     let mailOptions = {
-        from: '"LMS" <email>', // change this
+        from: '"LMS ADMIN" <adm1n157a70r@gmail.com>',
         to: email,
         subject: "Please verify your Email address.",
         text: "Enter the code\n" + code
