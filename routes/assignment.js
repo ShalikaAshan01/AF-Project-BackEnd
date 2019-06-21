@@ -13,14 +13,14 @@ router.get(('/'), (req, res ) => {
 });
 
 router.get(('/:id'), (req, res ) => {
+    AssignmentController.getById( req, res);
+});
+
+router.get(('/course/:courseName'), (req, res ) => {
     AssignmentController.getbyCourse(req,res);
 });
 
-router.get(('course/:courseName'), (req, res ) => {
-    AssignmentController.getById(req,res);
-});
-
-router.get(('name/:assgnmentName'), (req, res ) => {
+router.get(('/name/:assgnmentName'), (req, res ) => {
     AssignmentController.getbyAssgnmentName(req,res);
 });
 

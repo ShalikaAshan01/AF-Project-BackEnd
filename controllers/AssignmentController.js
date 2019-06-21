@@ -49,7 +49,8 @@ Assignment.updateAssignment = function( req, res ){
 }
 
 Assignment.getbyCourse = function( req, res ){
-    Assignment.findAll({
+
+    Assignment.find({
         courseName: req.params.courseName
     }).then( (responce)=> {
         res.status(200).json( responce );
@@ -59,7 +60,7 @@ Assignment.getbyCourse = function( req, res ){
 }
 
 Assignment.getbyAssgnmentName = function( req, res ){
-    Assignment.findAll({
+    Assignment.find({
         assgnmentName: req.params.assgnmentName
     }).then( (responce)=> {
         res.status(200).json( responce );
