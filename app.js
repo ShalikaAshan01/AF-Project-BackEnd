@@ -13,6 +13,7 @@ mongoose.connect('mongodb+srv://Lms:lms@af-lms-ikin0.mongodb.net/AF-LMS?retryWri
  */
 const UserRoutes = require('./routes/users');
 const CourseRoutes = require('./routes/courses');
+const AssignmentRoute = require('./routes/assignment')
 
 app.use(morgan('dev'));
 
@@ -39,6 +40,7 @@ app.use((req, res, next) => {
  */
 app.use('/user', UserRoutes);
 app.use('/lms/course', CourseRoutes);
+app.use('/lms/Assigment', AssignmentRoute);
 /**
  * Sever configuration
  */
