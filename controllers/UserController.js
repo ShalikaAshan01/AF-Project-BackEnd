@@ -11,7 +11,56 @@ const nodeMailer = require('nodemailer');
 
 const User = require('../models/User');
 
-exports.register = (req, res, next) => {
+exports.index = (req, res) => {
+    User.find()
+        .exec()
+        .then(result => {
+            res.status(200).json({
+                message: 'All users',
+                success: true,
+                users: result
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+};
+
+exports.findInstructorByFaculty = (req, res) => {
+    const faculty = req.params.faculty;
+
+    User.find({ faculty: faculty, type: { $gte: 'INSTRUCTOR' } })
+        .exec()
+        .then(result => {
+            if (result.length > 0) {
+                return res.status(200).json({
+                    count: result.length,
+                    message: 'Instructors found',
+                    success: true,
+                    users: result
+                });
+            }
+            else {
+                return res.status(404).json({
+                    count: result.length,
+                    message: 'No Instructors',
+                    success: false
+                });
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+
+}
+
+exports.register = (req, res) => {
     User.find({ username: req.body.username })
         .exec()
         .then(user => {
