@@ -9,12 +9,16 @@ const router = express.Router();
 // UserController import
 const UserController = require('../controllers/UserController');
 
+// User common routes
 router.route('/').get(UserController.index);
 router.route('/register').post(UserController.register);
 router.route('/login').post(UserController.login);
-router.route('/verify/send/:userId').post(UserController.sendVerifyMail);
+router.route('/id/:userId').get(UserController.getUserById);
+router.route('/username/:username').get(UserController.getUserByUsername);
+router.route('/verify/send/:userId').get(UserController.sendVerifyMail);
 router.route('/verify/:userId').post(UserController.verifyCode);
 
+// Instructor routes
 router.route('/instructor/:faculty').get(UserController.findInstructorByFaculty);
 
 

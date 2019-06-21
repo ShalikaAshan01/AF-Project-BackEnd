@@ -128,6 +128,58 @@ exports.register = (req, res) => {
 };
 
 
+exports.getUserById = (req, res) => {
+    User.find({ _id: req.params.userId })
+        .exec()
+        .then(user => {
+            if (user.length < 1) {
+                return res.status(404).json({
+                    message: 'User not found',
+                    success: false
+                });
+            } else {
+                return res.status(200).json({
+                    message: 'User found.',
+                    user: user[0],
+                    success: true
+                });
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            })
+        });
+};
+
+
+exports.getUserByUsername = (req, res) => {
+    User.find({ username: req.params.username })
+        .exec()
+        .then(user => {
+            if (user.length < 1) {
+                return res.status(404).json({
+                    message: 'User not found',
+                    success: false
+                });
+            } else {
+                return res.status(200).json({
+                    message: 'User found.',
+                    user: user[0],
+                    success: true
+                });
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            })
+        });
+};
+
+
 exports.login = (req, res, next) => {
     User.find({ username: req.body.username })
         .exec()
