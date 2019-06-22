@@ -17,6 +17,7 @@ router.get(('/:id'), (req, res ) => {
 });
 
 router.get(('/course/:courseName'), (req, res ) => {
+    console.log(req.params.id);
     AssignmentController.getbyCourse(req,res);
 });
 
@@ -28,7 +29,7 @@ router.delete(('/:id'), (req, res ) => {
     AssignmentController.deleteById(req,res);
 });
 
-router.put(('/:id'), (req, res ) => {
+router.post(('/update/:id'), (req, res ) => {
     AssignmentController.updateAssignment(req,res);
 });
 
