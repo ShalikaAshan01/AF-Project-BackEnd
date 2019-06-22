@@ -33,10 +33,6 @@ Assignment.deleteById = function( req, res ){
 }
 
 Assignment.updateAssignment = function( req, res ){
-
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', '*');
-
     const body = req.body;
 
     Assignment.findByIdAndUpdate(req.params.id, {
@@ -47,6 +43,7 @@ Assignment.updateAssignment = function( req, res ){
     }).then( Res => {
         res.status(200).json( Res );
     }).catch((err) =>{
+        console.log(err);
         res.status(500).json({ message:err });
     })
 }
