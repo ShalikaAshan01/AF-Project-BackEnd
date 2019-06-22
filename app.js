@@ -47,11 +47,11 @@ app.use('/lms/studentCourse', StudentCourseRoute);
 /**
  * Sever configuration
  */
-app.listen(4200, err => {
+app.listen(8080, err => {
     if (err) {
         console.log('ERROR establishing server connection!');
         return;
     }
 
-    console.log('Server running on http://localhost:4200');
+    console.log('Server running on http://localhost:8080');
 });
