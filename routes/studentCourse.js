@@ -11,7 +11,8 @@ const StudentCourseController = require('../controllers/StudentCourseController'
 
 // User common routes
 router.route('/enroll').post(StudentCourseController.enrollToCourse);
-router.route('/unenroll/:studentId/:courseId').delete(StudentCourseController.unEnrollFromCourse);
+router.route('/unenroll/:id').delete(StudentCourseController.unEnrollFromCourse);
+router.route('/getAllById/:id').get(StudentCourseController.getAllCourse);
 
 
 module.exports = router;

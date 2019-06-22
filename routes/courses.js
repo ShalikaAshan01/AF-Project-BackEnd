@@ -14,5 +14,6 @@ router.route('/filterbyinstructor/:instructor_id').get(CourseController.filterIn
 router.route('/filterbyinstructorstatus/:instructor_id/:status').get(CourseController.filterInstructorStatus);
 router.route('/filterbyfacultystatus/:faculty/:status').get(CourseController.filterFacultyStatus);
 router.route('/changestatus/:id').put(CourseController.changeStatus);
+router.route('/getByCourseName/:name').get(CourseController.getByName);
 
 module.exports = router;

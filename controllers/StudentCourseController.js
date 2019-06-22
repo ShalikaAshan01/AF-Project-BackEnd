@@ -30,8 +30,7 @@ exports.enrollToCourse = (req, res) => {
 
 exports.unEnrollFromCourse = function (req, res) {
     var query = {
-        studentId: req.params.studentId,
-        courseId: req.params.courseId
+        _id: req.params.id
     };
     StudentCourse.remove(query, function (err, studentCourse) {
         if (err) {
@@ -45,3 +44,21 @@ exports.unEnrollFromCourse = function (req, res) {
         });
     });
 };
+
+exports.getAllCourse = function (req, res) {
+    var query = {
+        studentId: req.params.id
+    };
+
+    StudentCourse.find(query, function (err, studentCourse) {
+        if (err) {
+            res.json({
+                status: "error",
+                message: err,
+            });
+        }
+        res.json({
+            studentCourse
+        });
+    });
+}

@@ -91,3 +91,20 @@ exports.changeStatus = function (req, res) {
         });
     });
 };
+
+exports.getByName = function (req, res) {
+    var query = { 
+        name: req.params.name
+    };
+    Course.find(query, function (err, courses) {
+        if (err) {
+            res.json({
+                status: "error",
+                message: err,
+            });
+        }
+        res.json({
+            courses
+        });
+    });
+};
