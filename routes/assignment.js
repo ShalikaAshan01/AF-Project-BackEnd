@@ -28,7 +28,7 @@ router.delete(('/:id'), (req, res ) => {
     AssignmentController.deleteById(req,res);
 });
 
-router.put(('/:id'), (req, res ) => {
+router.post(('/:id'), (req, res ) => {
     AssignmentController.updateAssignment(req,res);
 });
 
