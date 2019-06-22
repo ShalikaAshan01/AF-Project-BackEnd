@@ -7,7 +7,8 @@ exports.enrollToCourse = (req, res) => {
     const studentCourse = new StudentCourse({
         _id: new mongoose.Types.ObjectId(),
         studentId: req.body.studentId,
-        courseId: req.body.courseId
+        courseId: req.body.courseId,
+        courseName: req.body.courseName
     });
     studentCourse
         .save()
