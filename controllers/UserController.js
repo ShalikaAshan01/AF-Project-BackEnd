@@ -128,6 +128,51 @@ exports.register = (req, res) => {
 };
 
 
+exports.updateUser = (req, res) => {
+    const id = req.params.userId;
+    User.find({ _id: id })
+        .exec()
+        .then(user => {
+            if (user.length < 1) {
+                return res.status(401).json({
+                    message: 'Auth failed'
+                });
+            }
+
+            User.findByIdAndUpdate({ _id: id }, {
+                fullname: req.body.fullname,
+                phone: req.body.phone,
+                gender: req.body.gender,
+                status: req.body.status,
+                email: req.body.email,
+                faculty: req.body.faculty,
+                updated_at: Date.now()
+            })
+                .exec()
+                .then(result => {
+                    res.status(200).json({
+                        message: 'Update succesful',
+                        success: true,
+                        user: result
+                    });
+                })
+                .catch(err => {
+                    console.log(err);
+                    res.status(500).json({
+                        error: err
+                    })
+                });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err,
+                success: false
+            })
+        });
+};
+
+
 exports.getUserById = (req, res) => {
     User.find({ _id: req.params.userId })
         .exec()

@@ -15,6 +15,7 @@ router.route('/register').post(UserController.register);
 router.route('/login').post(UserController.login);
 router.route('/id/:userId').get(UserController.getUserById);
 router.route('/username/:username').get(UserController.getUserByUsername);
+router.route('/:userId').put(UserController.updateUser);
 router.route('/verify/send/:userId').get(UserController.sendVerifyMail);
 router.route('/verify/:userId').post(UserController.verifyCode);
 
